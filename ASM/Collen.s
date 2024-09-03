@@ -17,7 +17,9 @@ _start:
     mov rsp, rbp
     pop rbp
     xor rax, rax
-    ret
+    mov rax, 60
+    mov rdi, 0
+    syscall
 
 print_me:
     push rbp
