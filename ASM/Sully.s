@@ -8,15 +8,15 @@
 %define CLOSE 3
 
 section .data
-    str1 db "", 0
+    str1 db "Hola somos las putitas", 0
     file_name_template db "Sully_%d.s", 0
-    cmd_template db "nasm -f elf64 Sully_%d.s",10
-    linker_template db "cc -Wall -Wextra -Werror Sully_%1$d.o -o Sully_%1$d", 10
-    execution_template db "./Sully_%d"
+    cmd_template db "nasm -f elf64 Sully_%d.s", 0
+    linker_template db "cc -Wall -Wextra -Werror Sully_%1$d.o -o Sully_%1$d", 0
+    execution_template db "./Sully_%d", 0
 
 section .bss
     file_name resb 50
-    cmd resb 100
+    cmd_r resb 100
     linker resb 100
     execution resb 50
 
@@ -36,7 +36,7 @@ prepare_templates:
     lea rdx, QWORD[rel file_name_template]
     call snprintf wrt ..plt
     pop rcx
-    lea rdi, QWORD[rel cmd]
+    lea rdi, QWORD[rel cmd_r]
     lea rdx, QWORD[rel cmd_template]
     mov rsi, 100
     push rcx
@@ -90,7 +90,7 @@ print_to_file:
     mov rax, 0
     ret
 assemble_children:
-    lea rdi, QWORD[rel cmd]
+    lea rdi, QWORD[rel cmd_r]
     call system wrt ..plt
     cmp rax, 0
     je link_children
