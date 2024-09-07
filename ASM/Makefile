@@ -35,7 +35,7 @@ $(GRACE): $(OBJ_G)
 $(SULLY): $(OBJ_S)
 	$(LINKER) $(FLAGS_LINKER) $(OBJ_S) -o $(SULLY)
 
-%.o: %.c
+%.o: %.s
 	$(COMPILER) $(FLAGS_COMPILER) $< -o $@
 
 clean:
