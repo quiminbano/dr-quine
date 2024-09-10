@@ -1,27 +1,29 @@
 ;This is a comment in the code
 %macro PRINT_STRING 1
-    lea rdi, [rel %1]
-    mov rsi, 10
-    mov rdx, 34
-    mov rcx, 37
-    lea r8, [rel %1]
-    call printf wrt ..plt
+    mov rdi, rax
+    lea rsi, [rel %1]
+    mov rdx, 10
+    mov rcx, 34
+    mov r8, 37
+    mov r9, rsi
+    call dprintf wrt ..plt
 %endmacro
 %macro OPEN_FILE 1
     mov rax, 2
     lea rdi, [rel %1]
     mov rsi, 0x2
     or rsi, 0x40
+    or rsi, 0x200
     mov rdx, 420
     syscall
 %endmacro
 %macro FT_MAIN 0
 section .data
-    string db ";This is a comment in the code%1$c%3$cmacro PRINT_STRING 1%1$c    lea rdi, [rel %3$c1]%1$c    mov rsi, 10%1$c    mov rdx, 34%1$c    mov rcx, 37%1$c    lea r8, [rel %3$c1]%1$c    call printf wrt ..plt%1$c%3$cendmacro%1$c%3$cmacro OPEN_FILE 1%1$c    mov rax, 2%1$c    lea rdi, [rel %3$c1]%1$c    mov rsi, 0x2%1$c    or rsi, 0x40%1$c    mov rdx, 420%1$c    syscall%1$c%3$cendmacro%1$c%3$cmacro FT_MAIN 0%1$csection .data%1$c    string db %2$c%4$s%2$c, 0%1$c    file_name db %2$cGrace_kid.s%2$c, 0%1$csection .text%1$c    global main%1$c    extern printf%1$cmain:%1$c    push rbp%1$c    mov rbp, rsp%1$c    sub rsp, 16%1$c    OPEN_FILE file_name%1$c    cmp rax, 0%1$c    jl return_error%1$c    mov rdi, rax%1$c    push rdi%1$c    mov rax, 33%1$c    mov rsi, 1%1$c    syscall%1$c    cmp rax, 0%1$c    jl closefile_and_error%1$c    PRINT_STRING string%1$c    pop rdi%1$c    mov rax, 3%1$c    syscall%1$c    add rsp, 16%1$c    mov rsp, rbp%1$c    pop rbp%1$c    mov rax, 60%1$c    mov rdi, 0%1$c    syscall%1$cclosefile_and_error:%1$c    pop rdi%1$c    mov rax, 3%1$c    syscall%1$creturn_error:%1$c    add rsp, 16%1$c    mov rsp, rbp%1$c    pop rbp%1$c    mov rax, 60%1$c    mov rdi, 1%1$c    syscall%1$c%3$cendmacro%1$cFT_MAIN%1$c%1$csection .note.GNU-stack%1$c", 0
+    string db ";This is a comment in the code%1$c%3$cmacro PRINT_STRING 1%1$c    mov rdi, rax%1$c    lea rsi, [rel %3$c1]%1$c    mov rdx, 10%1$c    mov rcx, 34%1$c    mov r8, 37%1$c    mov r9, rsi%1$c    call dprintf wrt ..plt%1$c%3$cendmacro%1$c%3$cmacro OPEN_FILE 1%1$c    mov rax, 2%1$c    lea rdi, [rel %3$c1]%1$c    mov rsi, 0x2%1$c    or rsi, 0x40%1$c    or rsi, 0x200%1$c    mov rdx, 42051$c    syscall%1$c%3$cendmacro%1$c%3$cmacro FT_MAIN 0%1$csection .data%1$c    string db %3$c%4$s$3%c, 0%1$c    file_name db %2$cGrace_kid.s%2$c, 0%1$csection .text%1$c    global main%1$c    extern dprintf%1$cmain:%1$c    push rbp%1$c    mov rbp, rsp%1$c    sub rsp, 16%1$c    OPEN_FILE file_name%1$c    cmp rax, 0%1$c    jl return_error%1$c    push rax%1$c    PRINT_STRING string%1$c    pop rdi%1$c    mov rax, 3%1$c    syscall%1$c    add rsp, 16%1$c    mov rsp, rbp%1$c    pop rbp%1$c    mov rax, 0%1$c    ret%1$creturn_error:%1$c    add rsp, 16%1$c    mov rsp, rbp%1$c    pop rbp%1$c    mov rax, 1%1$c    ret%1$c%3$cendmacro%1$cFT_MAIN%1$c%1$csection .note.GNU-stack%1$c", 0
     file_name db "Grace_kid.s", 0
 section .text
     global main
-    extern printf
+    extern dprintf
 main:
     push rbp
     mov rbp, rsp
@@ -29,13 +31,7 @@ main:
     OPEN_FILE file_name
     cmp rax, 0
     jl return_error
-    mov rdi, rax
-    push rdi
-    mov rax, 33
-    mov rsi, 1
-    syscall
-    cmp rax, 0
-    jl closefile_and_error
+    push rax
     PRINT_STRING string
     pop rdi
     mov rax, 3
@@ -43,20 +39,14 @@ main:
     add rsp, 16
     mov rsp, rbp
     pop rbp
-    mov rax, 60
-    mov rdi, 0
-    syscall
-closefile_and_error:
-    pop rdi
-    mov rax, 3
-    syscall
+    mov rax, 0
+    ret
 return_error:
     add rsp, 16
     mov rsp, rbp
     pop rbp
-    mov rax, 60
-    mov rdi, 1
-    syscall
+    mov rax, 1
+    ret
 %endmacro
 FT_MAIN
 
