@@ -1,18 +1,18 @@
 %define FILE_ATTR (0x2 | 0x40 | 0x200)
 %define FILE_PERM (420)
 %define NL 10
-%define DQT 34
+%define SQT 39
 %define PERC 37
 %define COUNTER 5
 %define OPEN 2
 %define CLOSE 3
 
 section .data
-    str1 db "Hola somos las putitas", 0
-    file_name_template db "Sully_%d.s", 0
-    cmd_template db "nasm -f elf64 Sully_%d.s", 0
-    linker_template db "cc -Wall -Wextra -Werror Sully_%1$d.o -o Sully_%1$d", 0
-    execution_template db "./Sully_%d", 0
+    str1 db 'Hello my love', 0
+    file_name_template db 'Sully_%d.s', 0
+    cmd_template db 'nasm -f elf64 Sully_%d.s', 0
+    linker_template db 'cc -Wall -Wextra -Werror Sully_%1$d.o -o Sully_%1$d', 0
+    execution_template db './Sully_%d', 0
 
 section .bss
     file_name resb 50
@@ -76,7 +76,7 @@ print_to_file:
     push r9
     mov r9, rcx
     push rcx
-    mov rcx, DQT
+    mov rcx, SQT
     call dprintf wrt ..plt
     pop rcx
     add rsp, 8
