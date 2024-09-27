@@ -16,6 +16,11 @@ OBJ_G = Grace.o
 
 OBJ_S = Sully.o
 
+GRACE_TRASH = Grace_kid.s
+
+SULLY_TRASH = Sully_4.s Sully_4 Sully_3.s Sully_3 Sully_2.s Sully_2 Sully_1.s \
+Sully_1 Sully_0.s Sully_4.o Sully_3.o Sully_2.o Sully_1.o
+
 COMPILER = nasm
 
 FLAGS_COMPILER = -f elf64
@@ -39,7 +44,7 @@ $(SULLY): $(OBJ_S)
 	$(COMPILER) $(FLAGS_COMPILER) $< -o $@
 
 clean:
-	rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S)
+	rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S) $(GRACE_TRASH) $(SULLY_TRASH)
 
 fclean: clean
 	rm -f $(COLLEN) $(GRACE) $(SULLY)
