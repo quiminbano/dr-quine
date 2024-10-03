@@ -1,6 +1,8 @@
 use std::process::Command;
 use std::fs::File;
-use std::io::{self, Write};
+use std::io::Write;
+use std::env;
+use std::path::Path;
 
 fn execute_command(executable_name: &str, file_name : &str)
 {
@@ -18,21 +20,9 @@ fn main() -> i32
         return 0;
     }
     let mut instruction_number: i32 = i - 1;
-    match File::open("Sully_5.rs")
+    match env::current_exe()
     {
-        Ok(_) => instruction_number = i - 1,
-        Err(e) => 
-        {
-            if e.kind() == io::ErrorKind::NotFound
-            {
-                instruction_number = i;
-            }
-            else
-            {
-                eprintln!("Error trying to open Sully_5 executable");
-                return 1;
-            }
-        }
+        Ok(path) =>
     }
     let file_name: String = format!("Sully_{0}.rs", instruction_number);
     let executable_name: String = format!("Sully_{0}", instruction_number);
