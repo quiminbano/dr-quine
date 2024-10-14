@@ -12,6 +12,25 @@ fn execute_command(executable_name: &str, file_name : &str)
         Command::new(format!("./{}", executable_name)).status().expect(format!("Failed to execute the binary {}.", executable_name).as_str());
     }
 }
+
+fn  check_executable_name() -> bool
+{
+    let path_string: String;
+    let index: usize;
+
+    let path_exec = match env::current_exe()
+    {
+        Ok(path) => path,
+        Err(_) => return false
+    }
+    path_string = path_exec.into_os_string().into_string();
+    index = match path_string.rfind()
+    {
+        Some(v) => v,
+        None => return false
+    }
+}
+
 fn main() -> i32
 {
 	let	i: i32 = 5;
@@ -20,10 +39,7 @@ fn main() -> i32
         return 0;
     }
     let mut instruction_number: i32 = i - 1;
-    match env::current_exe()
-    {
-        Ok(path) =>
-    }
+    if 
     let file_name: String = format!("Sully_{0}.rs", instruction_number);
     let executable_name: String = format!("Sully_{0}", instruction_number);
     let mut file = File::create(&file_name).expect("Error creating the file");
