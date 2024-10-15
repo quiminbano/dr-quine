@@ -18,8 +18,9 @@ OBJ_S = Sully.o
 
 GRACE_TRASH = Grace_kid.s
 
-SULLY_TRASH = Sully_4.s Sully_4 Sully_3.s Sully_3 Sully_2.s Sully_2 Sully_1.s \
-Sully_1 Sully_0.s Sully_4.o Sully_3.o Sully_2.o Sully_1.o
+SULLY_TRASH = Sully_5.s Sully_5 Sully_4.s Sully_4 Sully_3.s Sully_3 Sully_2.s \
+Sully_2 Sully_1.s Sully_1 Sully_0.s Sully_0 Sully_5.o Sully_4.o Sully_3.o \
+Sully_2.o Sully_1.o Sully_0.o
 
 COMPILER = nasm
 
