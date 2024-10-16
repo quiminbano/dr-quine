@@ -1,16 +1,16 @@
-COLLEN = Collen
+COLLEEN = Colleen
 
 GRACE = Grace
 
 SULLY = Sully
 
-SRC_C = Collen.s
+SRC_C = Colleen.s
 
 SRC_G = Grace.s
 
 SRC_S = Sully.s
 
-OBJ_C = Collen.o
+OBJ_C = Colleen.o
 
 OBJ_G = Grace.o
 
@@ -30,10 +30,10 @@ LINKER = cc
 
 FLAGS_LINKER = -Wall -Wextra -Werror -Wpedantic
 
-all: $(COLLEN) $(GRACE) $(SULLY)
+all: $(COLLEEN) $(GRACE) $(SULLY)
 
-$(COLLEN): $(OBJ_C)
-	$(LINKER) $(FLAGS_LINKER) $(OBJ_C) -o $(COLLEN)
+$(COLLEEN): $(OBJ_C)
+	$(LINKER) $(FLAGS_LINKER) $(OBJ_C) -o $(COLLEEN)
 
 $(GRACE): $(OBJ_G)
 	$(LINKER) $(FLAGS_LINKER) $(OBJ_G) -o $(GRACE)
@@ -48,7 +48,7 @@ clean:
 	rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S) $(GRACE_TRASH) $(SULLY_TRASH)
 
 fclean: clean
-	rm -f $(COLLEN) $(GRACE) $(SULLY)
+	rm -f $(COLLEEN) $(GRACE) $(SULLY)
 
 re: fclean all
 

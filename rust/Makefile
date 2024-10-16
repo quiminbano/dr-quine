@@ -1,16 +1,16 @@
-COLLEN = Collen
+COLLEEN = Colleen
 
 GRACE = Grace
 
 SULLY = Sully
 
-SRC_C = Collen.rs
+SRC_C = Colleen.rs
 
 SRC_G = Grace.rs
 
 SRC_S = Sully.rs
 
-OBJ_C = Collen.o
+OBJ_C = Colleen.o
 
 OBJ_G = Grace.o
 
@@ -24,10 +24,10 @@ Sully_3.o Sully_2.o Sully_1.o Sully_0.o
 
 COMPILER = rustc
 
-all: $(COLLEN) $(GRACE) $(SULLY)
+all: $(COLLEEN) $(GRACE) $(SULLY)
 
-$(COLLEN): $(OBJ_C)
-	$(COMPILER) $(SRC_C) -o $(COLLEN)
+$(COLLEEN): $(OBJ_C)
+	$(COMPILER) $(SRC_C) -o $(COLLEEN)
 
 $(GRACE): $(OBJ_G)
 	$(COMPILER) $(SRC_G) -o $(GRACE)
@@ -42,7 +42,7 @@ clean:
 	rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S) $(GRACE_TRASH) $(SULLY_TRASH)
 
 fclean: clean
-	rm -f $(COLLEN) $(GRACE) $(SULLY)
+	rm -f $(COLLEEN) $(GRACE) $(SULLY)
 
 re: fclean all
 
